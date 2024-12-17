@@ -18,3 +18,13 @@
 - Node.js 바인딩
   - Node.js 바인딩은 JavaScript 코드와 C, C++ 코드 사이를 연결하는 역할을 합니다.
   - Node.js의 많은 내장 모듈이 C, C++로 구현되어 있으며, 이를 JavaScript 코드에서 호출할 수 있도록 돕습니다.
+
+- 작업 흐름(파일 열기 작업 예시)
+  - JavaScript 코드가 V8 JavaScript 엔진에서 실행됩니다.
+  - 데이터베이스 접근, 파일 읽기 등 V8 JavaScript 엔진이 직접 처리할 수 없는 작업이 발생하면, Node.js API를 통해 이를 처리합니다.
+    - `fs.open()` 함수 호출 시 내부적으로 lib/fs.js에 정의된 함수가 실행됩니다.
+  - Node.js API 함수가 호출되면 Node.js 바인딩을 통해 libuv에 작업이 전달됩니다.
+    - `lib/fs.js`의 `binding.open()` 호출
+    - `src/node_file.cc`의 `Open()` 호출
+    - `libuv`의 `uv_fs_open()` 함수에 작업 전달
+  - libuv는 작업을 처리하고, 결과를 콜백(callback) 형태로 JavaScript 코드에 전달합니다.
