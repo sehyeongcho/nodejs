@@ -28,3 +28,9 @@
     - `src/node_file.cc`의 `Open()` 호출
     - `libuv`의 `uv_fs_open()` 함수에 작업 전달
   - libuv는 작업을 처리하고, 결과를 콜백(callback) 형태로 JavaScript 코드에 전달합니다.
+    - `libuv`의 `uv_fs_open()` 호출
+    - 내부적으로 `uv__fs_open()` 호출
+    - 운영체제의 시스템 레벨 함수인 `open()` 함수를 호출
+    - `open()` 시스템 콜을 통해 실제 파일이 열리게 되며, 작업 결과를 반환합니다.
+  - 작업이 완료되면 libuv가 등록된 콜백 함수를 호출해 결과를 JavaScript 코드에 전달합니다.
+  - 이후 JavaScript 코드에서 결과를 처리합니다.
