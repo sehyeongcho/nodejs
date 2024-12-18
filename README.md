@@ -38,3 +38,10 @@
 - `async/await`, `then`을 사용하는 이유는 비동기 작업을 동기적으로 실행하는 것처럼 보이게 만들어 가독성과 코드 유지보수성을 높이기 위해서입니다.
 - JavaScript는 본질적으로 동기 언어입니다. 하지만 우리가 사용하는 비동기 코드는 JavaScript 자체의 기능이 아니라 브라우저나 Node.js 런타임에서 제공하는 API를 통해 동작합니다.
   - 예를 들어, `setTimeout()` 함수는 비동기적으로 동작하지만, 이는 JavaScript 자체가 아니라 브라우저의 `window` 객체 또는 Node.js의 `global` 객체를 통해 제공되는 API입니다.
+
+- Blocking이란, JavaScript 코드 실행이 특정 non-JavaScript 작업(파일 읽기, 네트워크 요청 등)이 완료될 때까지 중단되는 현상을 의미합니다.
+- Node.js의 표준 라이브러리는 대부분의 I/O 메서드에 대해 non-blocking 버전을 제공합니다.
+- Non-blocking 메서드가 완료된 후 실행 흐름을 제어하고 싶다면, 다음과 같은 방식으로 비동기 작업을 처리할 수 있습니다.
+  - 콜백 함수
+  - Promise
+  - async/await
