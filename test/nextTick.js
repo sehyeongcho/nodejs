@@ -9,7 +9,7 @@ const callback = () => {
 setImmediate(() => console.log('setImmediate 비동기 함수의 콜백 함수입니다.'));
 // Check 단계에서 처리됩니다. 하지만 nextTick의 재귀 호출로 인해 실행되지 못합니다.
 
-setTimeout(() => console.log('setTimeout 비동기 함수의 콜백 함수입니다.'), 0);
+setTimeout(() => console.log('setTimeout 비동기 함수의 콜백 함수입니다.'), 100);
 // Timers 단계에서 처리됩니다. 하지만 nextTick의 재귀 호출로 인해 실행되지 못합니다.
 
 process.nextTick(callback);
