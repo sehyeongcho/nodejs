@@ -14,5 +14,13 @@ subject.on("updatePost", () => {
 });
 // observer 2: 동일 이벤트에 추가적인 리스너 등록
 
+subject.on("createPost", (type) => {
+  console.log(`I like this ${type} post!`);
+});
+// observer 3: 동일 이벤트에 추가적인 리스너 등록록
+
 subject.emit("updatePost");
 // emit 메서드는 updatePost 이벤트를 트리거하여, 등록된 모든 리스너를 실행합니다.
+
+subject.emit("createPost", "image");
+// emit 메서드에 추가 인수를 전달할 수 있습니다.
