@@ -1,9 +1,9 @@
 function decrypt(data) {
-  return "decrypted data";
+  return "복호화된 데이터";
 };
 
 function read() {
-  return decrypt("data");
+  return decrypt("데이터터");
 };
 
 export {
