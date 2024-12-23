@@ -1,5 +1,13 @@
 import { send } from "./request.mjs"; // 요청을 처리하는 모듈
 import { read } from "./response.mjs"; // 응답을 처리하는 모듈
+import { decrypt } from "./response.mjs"; // 이미 위에서 response.mjs 모듈을 가져왔으므로, 캐시된 인스턴스를 재사용합니다.
+
+/**
+ * ESM의 모듈 캐싱 동작:
+ * - 동일한 모듈 파일(`response.mjs`)은 한 번만 로드됩니다.
+ * - 두 번째 `import`는 기존에 로드된 모듈의 캐시된 결과를 참조합니다.
+ * - 따라서, 성능 상의 문제가 발생하지 않으며 중복 로드는 없습니다.
+ */
 
 /**
  * makeRequest: 주어진 URL로 데이터를 전송하고, 응답 데이터를 반환합니다.

@@ -3,9 +3,12 @@ function decrypt(data) {
 };
 
 function read() {
-  return decrypt("데이터터");
+  return decrypt("데이터");
 };
 
+console.log("response.mjs 모듈에 접근했습니다.");
+
 export {
-  read
+  read,
+  decrypt
 };
