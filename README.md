@@ -91,3 +91,55 @@
 - CommonJS 모듈은 `require`, `module.exports`를 사용하고, ECMAScript 모듈(ESM)은 `import`, `export`를 사용하여 모듈을 가져오거나 내보낼 수 있습니다.
 - Node.js에서는 모듈이 한 번 로드되면 캐싱됩니다. 동일한 모듈을 다시 가져오더라도 캐싱된 결과를 재사용합니다.
 - `index.js` 파일을 생성하여 여러 모듈을 중앙에서 가져오고 내보내는 방식은 모든 모듈을 한 번에 로드하게 됩니다. 이로 인해 특정 모듈이 필요하지 않은 경우에도 불필요하게 로드되어 초기 로딩 시간이 증가할 수 있습니다.
+
+- NPM(Node Package Manager)은 자바스크립트 프로그래밍 언어를 위한 패키지 관리자입니다. 명령 줄 클라이언트(npm), 패키지의 온라인 데이터베이스(npm 레지스트리)로 구성되어 있습니다.
+  - package.json 파일 생성: `npm init -y`
+  - package 설치: `npm install`
+  - package 전역 설치: `npm install -g`
+  - package 버전 취약성 파악: `npm audit`
+  - package 버전 취약성 해결: `npm audit fix --force`
+- node_modules 디렉터리에는 package.json의 모듈들과 이 모듈들이 의존하고 있는 모듈들까지 모두 포함되어 있습니다.
+- SemVer(Semantic Versioning)은 major, minor, patch 총 3개 자리로 구성되어 있으며, 각 자리는 아래와 같은 상황에서 증가합니다.
+  - Major: 호환되지 않는 API 변경
+  - Minor: 기능 추가
+  - Patch: 버그 수정
+- SemVer에서 버전을 표기할 때 틸드(~), 캐럿(^) 기호를 사용할 수 있습니다.
+  - 틸드(~): major, minor 자리는 변경되지 않고, patch 자리만 변경됩니다.
+  - 캐럿(^): major 자리만 변경되지 않고, minor, patch 자리는 변경됩니다.
+  - 단, 버전이 1.0.0 미만일 경우에는 틸드(~), 캐럿(^) 중 어느 기호를 사용하든지 틸드(~) 기호를 사용한 것처럼 동작합니다. (major, minor 자리는 변경되지 않고, patch 자리만 변경됩니다.) 이는 1.0.0 미만의 버전에서는 API 변경이 계속 일어나기 때문에 minor 자리의 변경으로도 호환이 되지 않을 수 있기 때문입니다.
+- package-lock.json 파일은 package.json 파일이 실제 생성되는 시점의 의존성 트리에 대한 정보를 가지고 있습니다. package.json 파일만 있고 틸드(~), 캐럿(^) 기호로 버전이 표기되어 있으면, 패키지 업데이트 시 여러 사용자가 서로 다른 버전의 패키지를 사용하게 되어 호환에 문제가 발생할 수 있기 때문입니다. package-lock.json 파일은 package.json 파일이 실제 생성되는 시점의 정확한 패키지 버전 정보를 가지고 있습니다.
+- nodemon은 파일 변경 감지 시 자동으로 프로그램을 다시 시작해주는 패키지입니다.
+  - 전역 설치 시, nodemon의 경로를 입력해야 명령어를 사용할 수 있습니다.
+  - 로컬 설치 시, nodemon 명령어만으로 사용할 수 있습니다.
+
+- NPM(Node Package Manager)은 자바스크립트 프로그래밍 언어를 위한 패키지 관리자입니다. 패키지 설치 및 관리를 위한 명령 줄 클라이언트(npm CLI)와 패키지의 온라인 데이터베이스(npm 레지스트리)로 구성됩니다. NPM을 통해 프로젝트 의존성을 관리하고, 새로운 패키지를 생성하거나 배포할 수 있습니다.
+  - package.json 파일 생성: `npm init -y`
+  - 패키지 설치: `npm install`
+  - 패키지 전역 설치: `npm install -g`
+  - 패키지 버전 취약성 파악: `npm audit`
+  - 패키지 버전 취약성 해결: `npm audit fix --force`
+- node_modules 디렉터리에는 package.json에 명시된 모듈들과 이 모듈들이 의존하는 모든 하위 모듈들이 포함되어 있습니다.
+- SemVer(Semantic Versioning)는 소프트웨어 버전 표기법으로, 세 가지 자리로 구성됩니다: Major, Minor, Patch.
+  - Major: 호환되지 않는 API 변경
+  - Minor: 새로운 기능 추가(기존 기능과 호환)
+  - Patch: 버그 수정(기존 기능과 호환)
+  - 예: 버전 2.4.3에서 Major는 2, Minor는 4, Patch는 3입니다.
+- SemVer에서는 버전을 표기할 때 다음과 같은 범위 지정 기호를 사용할 수 있습니다.
+  - 틸드(~): Major와 Minor 자리는 고정, Patch 자리만 변경 가능
+    - 예: `~1.2.3` → 허용 가능한 버전은 `1.2.3`부터 `1.2.x`까지(x는 최신 버전)
+  - 캐럿(^): Major 자리는 고정, Minor와 Patch 자리는 변경 가능
+    - 예: `^1.2.3` → 허용 가능한 버전은 `1.2.3`부터 `1.x.x`까지(x는 최신 버전)
+  - 단, 버전이 `0.x.x` 또는 `0.0.x`인 경우에는 Minor 자리까지 고정됩니다.
+    - 예: `^0.1.2` → 허용 가능한 버전은 `0.1.x`까지
+- package-lock.json 파일은 package.json의 의존성 트리에 대한 정확한 정보를 기록합니다. 이는 모든 개발자가 동일한 의존성 버전을 설치하도록 보장하며, 패키지 버전 충돌을 방지합니다.
+- nodemon은 파일 변경 사항을 감지해 프로그램을 자동으로 다시 시작해주는 개발 도구입니다.
+  - 전역 설치 시: `nodemon index.js` (명령어를 전역에서 사용할 수 있습니다.)
+  - 로컬 설치 시: `./node_modules/.bin/nodemon index.js`, `npx nodemon index.js` (`package.json` 파일의 `scripts` 섹션에 `nodemon` 명령어를 추가해 실행할 수도 있습니다.)
+- NPX(Node Package eXecute)는 NPM과 같이 설치되며, 다음과 같은 역할을 합니다.
+  - 로컬 설치된 패키지 실행: 로컬 프로젝트에 설치된 실행 파일을 전역 경로를 지정하지 않고 실행할 수 있습니다.
+    - 예: `npx nodemon index.js` (이는 `./node_modules/.bin/nodemon index.js`를 간단히 줄여주는 역할을 합니다.)
+  - 일회성 패키지 실행: 패키지를 프로젝트에 설치하지 않고도 바로 실행할 수 있습니다.
+    - 예: `npx create-react-app my-app` (이 명령은 `create-react-app`을 설치하지 않고 바로 실행합니다.)
+  - 특정 버전의 패키지 실행: 특정 버전의 패키지를 설치하고 실행할 수 있습니다.
+    - 예: `npx typescript@4.0 tsc --init`
+  - 명령 충돌 방지: 로컬과 전역에 동일한 패키지가 설치된 경우, npx는 로컬 패키지를 우선 실행합니다.
